@@ -1,0 +1,150 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* macOS Finder-inspired design system */
+:root {
+  --mac-bg: #F5F5F7;
+  --mac-sidebar: #F2F2F7;
+  --mac-white: #FFFFFF;
+  --mac-border: #D2D2D7;
+  --mac-separator: #E5E5EA;
+  --mac-text: #1D1D1F;
+  --mac-text-secondary: #86868B;
+  --mac-text-tertiary: #C7C7CC;
+  --mac-blue: #007AFF;
+  --mac-selected-bg: #E5F0FF;
+  --mac-red: #FF5F57;
+  --mac-yellow: #FEBC2E;
+  --mac-green: #28C840;
+  --mac-hover: #E8E8ED;
+}
+
+@layer base {
+  body {
+    @apply m-0 antialiased;
+    font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text',
+      'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'Helvetica Neue', sans-serif;
+    background: var(--mac-bg);
+    color: var(--mac-text);
+  }
+
+  * { @apply box-border; }
+
+  ::-webkit-scrollbar { width: 5px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: #C7C7CC; border-radius: 4px; }
+  ::-webkit-scrollbar-thumb:hover { background: #A8A8AD; }
+}
+
+@layer utilities {
+  .mac-window {
+    background: var(--mac-white);
+    border: 1px solid var(--mac-border);
+    border-radius: 12px;
+    box-shadow: 0 22px 70px rgba(0,0,0,0.15), 0 8px 20px rgba(0,0,0,0.08);
+  }
+
+  .mac-sidebar-item {
+    @apply flex items-center gap-2.5 px-3 py-1.5 rounded-lg text-[13px] font-medium transition-all duration-100 cursor-pointer;
+    color: var(--mac-text);
+  }
+  .mac-sidebar-item:hover {
+    background: var(--mac-hover);
+  }
+  .mac-sidebar-item.active {
+    background: var(--mac-selected-bg);
+    color: var(--mac-blue);
+  }
+
+  .mac-sidebar-section-title {
+    @apply text-[11px] font-semibold uppercase tracking-wider px-3 py-1.5;
+    color: var(--mac-text-secondary);
+  }
+
+  .mac-input {
+    @apply w-full rounded-lg px-3 py-2 text-[13px] outline-none transition-all duration-100;
+    border: 1px solid var(--mac-border);
+    background: var(--mac-white);
+    color: var(--mac-text);
+  }
+  .mac-input:focus {
+    border-color: var(--mac-blue);
+    box-shadow: 0 0 0 2px rgba(0,122,255,0.15);
+  }
+  .mac-input::placeholder { color: var(--mac-text-tertiary); }
+  .mac-input-error { border-color: var(--mac-red); }
+  .mac-input-error:focus {
+    border-color: var(--mac-red);
+    box-shadow: 0 0 0 2px rgba(255,95,87,0.15);
+  }
+
+  .mac-btn {
+    @apply inline-flex items-center justify-center gap-2 px-5 py-2 rounded-lg text-[13px] font-medium
+           text-white transition-all duration-100 select-none;
+    background: var(--mac-blue);
+  }
+  .mac-btn:hover:not(:disabled) { background: #0062CC; }
+  .mac-btn:active:not(:disabled) { background: #004C99; }
+  .mac-btn:disabled { opacity: 0.4; cursor: default; }
+
+  .mac-btn-secondary {
+    @apply inline-flex items-center justify-center gap-2 px-4 py-2 rounded-lg text-[13px] font-medium
+           transition-all duration-100 select-none;
+    background: var(--mac-white);
+    color: var(--mac-text);
+    border: 1px solid var(--mac-border);
+  }
+  .mac-btn-secondary:hover { background: var(--mac-hover); }
+
+  .mac-card {
+    background: var(--mac-white);
+    border: 1px solid var(--mac-separator);
+    border-radius: 10px;
+  }
+
+  .mac-badge {
+    @apply inline-flex items-center px-2 py-0.5 rounded-md text-[11px] font-medium;
+    background: var(--mac-selected-bg);
+    color: var(--mac-blue);
+  }
+
+  .mac-tag {
+    @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-[11px] font-medium;
+    background: #F2F2F7;
+    color: #636366;
+  }
+}
+
+/* macOS traffic light buttons */
+.mac-dot {
+  @apply w-3 h-3 rounded-full transition-all duration-100;
+}
+.mac-dot.close { background: var(--mac-red); }
+.mac-dot.minimize { background: var(--mac-yellow); }
+.mac-dot.maximize { background: var(--mac-green); }
+
+.mac-titlebar {
+  @apply flex items-center px-4 shrink-0 select-none;
+  height: 44px;
+  background: var(--mac-white);
+  border-bottom: 1px solid var(--mac-separator);
+  border-radius: 12px 12px 0 0;
+}
+
+.mac-sidebar {
+  background: var(--mac-sidebar);
+  border-right: 1px solid var(--mac-separator);
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideIn {
+  from { transform: translateX(100%); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+.animate-fade-in { animation: fadeIn 0.25s ease-out forwards; }
